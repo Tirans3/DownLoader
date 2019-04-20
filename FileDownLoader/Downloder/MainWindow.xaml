@@ -7,6 +7,21 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Button Content="Button" HorizontalAlignment="Left" Margin="707,134,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.509,-0.436"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="10,134,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.944,0.489"/>
+        <ProgressBar HorizontalAlignment="Left" Height="20" Margin="90,134,0,0" VerticalAlignment="Top" Width="612"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="90,106,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="612"/>
+        <TextBox HorizontalAlignment="Left" Height="249" Margin="11,159,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="771" RenderTransformOrigin="0.5,0.5">
+            <TextBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="0.238"/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="-1.242"/>
+                </TransformGroup>
+            </TextBox.RenderTransform>
+        </TextBox>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="364,66,0,0" VerticalAlignment="Top"/>
+
     </Grid>
 </Window>
