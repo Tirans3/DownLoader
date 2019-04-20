@@ -9,9 +9,9 @@
     <Grid>
         <Button x:Name="Cancel"  Content="Cancel" HorizontalAlignment="Left" Margin="707,134,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.509,-0.436"/>
         <Button x:Name="Download" Content="Download" HorizontalAlignment="Left" Margin="10,134,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.944,0.489"/>
-        <ProgressBar HorizontalAlignment="Left" Height="20" Margin="90,134,0,0" VerticalAlignment="Top" Width="612"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="90,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="612"/>
-        <TextBox HorizontalAlignment="Left" Height="249" Margin="11,159,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="771" RenderTransformOrigin="0.5,0.5">
+        <ProgressBar x:Name="Bar" HorizontalAlignment="Left" Height="20" Margin="90,134,0,0" VerticalAlignment="Top" Width="612"/>
+        <TextBox x:Name="Inputurl" HorizontalAlignment="Left" Height="23" Margin="90,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="612"/>
+        <TextBox x:Name="outbox" HorizontalAlignment="Left" Height="249" Margin="11,159,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="771" RenderTransformOrigin="0.5,0.5">
             <TextBox.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
