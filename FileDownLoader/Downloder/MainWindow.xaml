@@ -7,11 +7,11 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="707,134,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.509,-0.436"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="10,134,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.944,0.489"/>
+        <Button x:Name="Cancel"  Content="Cancel" HorizontalAlignment="Left" Margin="707,134,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.509,-0.436"/>
+        <Button x:Name="Download" Content="Download" HorizontalAlignment="Left" Margin="10,134,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.944,0.489"/>
         <ProgressBar HorizontalAlignment="Left" Height="20" Margin="90,134,0,0" VerticalAlignment="Top" Width="612"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="90,106,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="612"/>
-        <TextBox HorizontalAlignment="Left" Height="249" Margin="11,159,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="771" RenderTransformOrigin="0.5,0.5">
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="90,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="612"/>
+        <TextBox HorizontalAlignment="Left" Height="249" Margin="11,159,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="771" RenderTransformOrigin="0.5,0.5">
             <TextBox.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -21,7 +21,14 @@
                 </TransformGroup>
             </TextBox.RenderTransform>
         </TextBox>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="364,66,0,0" VerticalAlignment="Top"/>
+        <Label Content="                   DOWNLOADER" HorizontalAlignment="Left" Margin="257,75,0,0" VerticalAlignment="Top" Width="285" FontSize="16" FontStyle="Italic">
+            <Label.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="0"/>
+                    <GradientStop Color="{DynamicResource {x:Static SystemColors.InfoColorKey}}" Offset="0.759"/>
+                </LinearGradientBrush>
+            </Label.Background>
+        </Label>
 
     </Grid>
 </Window>
