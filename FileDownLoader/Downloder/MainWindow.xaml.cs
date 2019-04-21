@@ -24,26 +24,18 @@ namespace Downloder
         public MainWindow()
         {
             InitializeComponent();
+            
         }
 
         string str;
 
         HttpClient client = new HttpClient();
 
-      static  CancellationTokenSource cts = new CancellationTokenSource();
-
-        CancellationToken token = cts.Token;
-
-        public async Task<HttpResponseMessage> GetStreambyCanselasync(HttpClient client, string str,CancellationToken token)
-        {
-            if (token.IsCancellationRequested)
-                return null;
-         return    await client.GetAsync(str,token);
-            
-        }
-      
+        public bool flag = true;
+       
         private async void Download_Click(object sender, RoutedEventArgs e)
         {
+           
             Download.IsEnabled = false;
             str = Inputurl.Text;
             if (str == string.Empty || !Uri.IsWellFormedUriString(str, UriKind.RelativeOrAbsolute))
@@ -57,29 +49,30 @@ namespace Downloder
             {
                 try
                 {
-                    string stream = (await client.GetAsync(str, token)).Content.ToString();
-
-                    MessageBox.Show(stream.Length.ToString());
-                    using (StreamReader reader = new StreamReader(stream))
+                    using (var stream = await client.GetStreamAsync(str))
                     {
-                        string line;
-                        StringBuilder outtext = new StringBuilder();
-                        while ((line = await reader.ReadLineAsync()) != null)
+
+                        using (StreamReader reader = new StreamReader(stream))
                         {
-                            if (Bar.Value == 100) Bar.Value = 0;
+                            string line;
+                            StringBuilder outtext = new StringBuilder();
+                            while ((line = await reader.ReadLineAsync()) != null)
+                            {
+                                if (flag == false) return;
+                                if (Bar.Value == 100) Bar.Value = 0;
+                                
+                                Bar.Value += 0.001;
 
-                            Bar.Value += 0.001;
+                               outtext.Insert(outtext.Length,line);
+                            }
 
-                            outtext.Insert(outtext.Length, line);
+                            Bar.Value = 100;
+
+                            outbox.Text = outtext.ToString(); 
+
                         }
 
-                        Bar.Value = 100;
-
-                        outbox.Text = outtext.ToString();
-
                     }
-
-
                 }
                 catch(HttpRequestException ex )
                 {
@@ -102,8 +95,8 @@ namespace Downloder
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            cts.Cancel();
-            Cancel.IsEnabled = false;
+            flag = false;
+         
         }
     }
 }
