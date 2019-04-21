@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,7 +27,21 @@ namespace Downloder
         }
 
         string str;
-        HttpClient client;
+
+        HttpClient client = new HttpClient();
+
+      static  CancellationTokenSource cts = new CancellationTokenSource();
+
+        CancellationToken token = cts.Token;
+
+        public async Task<HttpResponseMessage> GetStreambyCanselasync(HttpClient client, string str,CancellationToken token)
+        {
+            if (token.IsCancellationRequested)
+                return null;
+         return    await client.GetAsync(str,token);
+            
+        }
+      
         private async void Download_Click(object sender, RoutedEventArgs e)
         {
             Download.IsEnabled = false;
@@ -42,29 +57,29 @@ namespace Downloder
             {
                 try
                 {
-                    HttpClient client = new HttpClient();
-                    using (Stream stream = await client.GetStreamAsync(str))
+                    string stream = (await client.GetAsync(str, token)).Content.ToString();
+
+                    MessageBox.Show(stream.Length.ToString());
+                    using (StreamReader reader = new StreamReader(stream))
                     {
-                        using (StreamReader reader = new StreamReader(stream))
+                        string line;
+                        StringBuilder outtext = new StringBuilder();
+                        while ((line = await reader.ReadLineAsync()) != null)
                         {
-                            string line;
-                            StringBuilder outtext = new StringBuilder();
-                            while ((line = await reader.ReadLineAsync()) != null)
-                            {
-                                if (Bar.Value == 100) Bar.Value = 0;
-                                
-                                Bar.Value += 0.001;
+                            if (Bar.Value == 100) Bar.Value = 0;
 
-                               outtext.Insert(outtext.Length,line);
-                            }
+                            Bar.Value += 0.001;
 
-                            Bar.Value = 100;
-
-                            outbox.Text = outtext.ToString(); 
-
+                            outtext.Insert(outtext.Length, line);
                         }
 
+                        Bar.Value = 100;
+
+                        outbox.Text = outtext.ToString();
+
                     }
+
+
                 }
                 catch(HttpRequestException ex )
                 {
@@ -83,6 +98,12 @@ namespace Downloder
                     Download.IsEnabled = true;
                 }
             }
+        }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            cts.Cancel();
+            Cancel.IsEnabled = false;
         }
     }
 }
