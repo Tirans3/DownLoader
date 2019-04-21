@@ -48,15 +48,19 @@ namespace Downloder
                         using (StreamReader reader = new StreamReader(stream))
                         {
                             string line;
+                            StringBuilder outtext = new StringBuilder();
                             while ((line = await reader.ReadLineAsync()) != null)
                             {
                                 if (Bar.Value == 100) Bar.Value = 0;
                                 
                                 Bar.Value += 0.001;
 
+                               outtext.Insert(outtext.Length,line);
                             }
 
                             Bar.Value = 100;
+
+                            outbox.Text = outtext.ToString(); 
 
                         }
 
