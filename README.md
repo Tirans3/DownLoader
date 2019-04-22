@@ -1,4 +1,6 @@
-<html bgcolor="#E6E6FA">
-
-<img  src="https://github.com/Tirans3/Images/blob/master/Image_ 2.jpg"  style="float: center; ">
+<html>
+<body bgcolor="#E6E6FA">
+<h1>Hello world!</h1>
+<p><a href="https://www.w3schools.com">Visit W3Schools.com!</a></p>
+</body>
 </html>
